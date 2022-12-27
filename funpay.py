@@ -12,8 +12,8 @@ from random import randint
 
 def bumping(user_link):
     delay = 10
-    login = 'login'
-    password = 'password'
+    login = ''
+    password = ''
     service = Service()
     service.start()
     driver = webdriver.Remote(service.service_url)
@@ -47,6 +47,11 @@ def bumping(user_link):
             driver.find_element(By.XPATH, '/html/body/div/div[1]/section/div[2]/div/div/div[2]/div/div[1]/div[2]/div/div[1]/button').click()
             time.sleep(1)
             try:
+                driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div[3]/button').click()
+                time.sleep(1)
+            except NoSuchElementException:
+                pass
+            try:
                 timer = driver.find_element(By.ID, "site-message").text
                 print(f'{timer} - {driver.find_element(By.CLASS_NAME, "inside").text}')
             except NoSuchElementException:
@@ -55,7 +60,7 @@ def bumping(user_link):
 
 
 def main():
-    bumping('user_link')
+    bumping('')
 
 
 if __name__ == '__main__':
